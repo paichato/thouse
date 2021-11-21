@@ -1,0 +1,12 @@
+{
+  "name": "thouse",
+  "displayName": "thouse",
+  "expo": {
+    "name": "thouse",
+    "slug": "thouse",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
