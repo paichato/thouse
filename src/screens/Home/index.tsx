@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
+import colors from "../../lib/colors";
 import {
   AvatarContainer,
   Container,
@@ -28,7 +29,7 @@ const Home = () => {
 
       <SearchContainer>
         <SearchIcon name="search1" size={24} color="black" />
-        <Input placeholder="pesquisar" />
+        <Input placeholderTextColor={colors.text} placeholder="pesquisar" />
       </SearchContainer>
     </Container>
   );
