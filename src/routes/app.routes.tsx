@@ -19,6 +19,7 @@ export default function AppRoutes() {
         tabBarShowLabel: false,
         tabBarInactiveBackgroundColor: colors.bg,
         tabBarActiveBackgroundColor: colors.bg,
+        tabBarHideOnKeyboard:true,
         
       }}
       tabBarOptions={{

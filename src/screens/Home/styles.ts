@@ -3,7 +3,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { AntDesign } from '@expo/vector-icons'; 
 import colors from '../../lib/colors'
 import { MaterialIcons } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 
 
 export const Container=styled.View`
@@ -78,7 +78,7 @@ align-items: center;
 justify-content: space-between;
 
 `
-export const SeeAllContainer=styled.View`
+export const SeeAllContainer=styled(TouchableOpacity)`
 flex-direction: row;
 align-items: center;
 `
