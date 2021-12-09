@@ -19,6 +19,7 @@ height: ${RFValue(45)}px;
 width: 100%;
 align-items: center;
 justify-content: space-between;
+margin-top: ${RFValue(15)}px;
 `
 
 export const WelcomeContainer=styled.View`
@@ -68,12 +69,14 @@ color: ${colors.text};
 
 export const CategoryContainer=styled.View`
 width: 100%;
+margin-top: ${RFValue(30)}px;
 `
 
 export const CategoryHeader=styled.View`
 flex-direction: row;
 align-items: center;
 justify-content: space-between;
+
 `
 export const SeeAllContainer=styled.View`
 flex-direction: row;
@@ -90,7 +93,8 @@ color: ${colors.yellow};
 `
 
 export const CategoryItemContainer=styled(TouchableOpacity)`
-
+margin-top: ${RFValue(10)}px;
+margin-bottom: ${RFValue(30)}px;
 `
 export const CategoryItemWrapper=styled.View`
 width: ${RFValue(60)}px;

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text, Dimensions, Animated, ScrollView } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import colors from "../../lib/colors";
 import {
   AvatarContainer,
@@ -33,8 +34,8 @@ const data = ["violet", "indigo", "blue", "orange"];
 
 const Home = () => {
   const [activeIndex, setActiveIndex] = useState({
-    current: 0,
-    previous: null,
+    current: 1,
+    previous: 0,
   });
   const scale = useRef(new Animated.Value(0)).current;
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -69,6 +70,63 @@ const Home = () => {
         </CategoryItemWrapper>
         <Greeting>{text}</Greeting>
       </CategoryItemContainer>
+    );
+  };
+
+  const Cards = () => {
+    return (
+      <>
+        <ScrollView
+          horizontal
+          pagingEnabled
+          decelerationRate="fast"
+          style={{ flexGrow: 0, marginTop: RFValue(20) }}
+          contentContainerStyle={{
+            paddingHorizontal: padding,
+            alignItems: "center",
+            paddingVertical: 10,
+            zIndex: 1,
+          }}
+          showsHorizontalScrollIndicator={false}
+          snapToInterval={offset}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+            {
+              useNativeDriver: false,
+              listener: onScroll,
+            }
+          )}
+        >
+          {data.map((x, i) => (
+            <Item key={x} data={x} i={i} scrollX={scrollX} />
+          ))}
+        </ScrollView>
+        <View
+          style={{
+            // flex: 1,
+            marginTop: 10,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {data.map((x, i) => (
+            <View
+              key={x}
+              style={[
+                {
+                  height: 10,
+                  width: 10,
+                  borderRadius: 5,
+                  marginHorizontal: 3,
+                  backgroundColor: "#444",
+                },
+                i == activeIndex.current && { backgroundColor: colors.yellow },
+              ]}
+            />
+          ))}
+        </View>
+      </>
     );
   };
 
@@ -107,54 +165,58 @@ const Home = () => {
           <CatItem text="Romance" emo="😘" />
         </CategoryItems>
       </CategoryContainer>
-      <ScrollView
-        horizontal
-        pagingEnabled
-        decelerationRate="fast"
-        style={{ flexGrow: 0 }}
-        contentContainerStyle={{
-          paddingHorizontal: padding,
-          alignItems: "center",
-          paddingVertical: 10,
-          zIndex: 1,
-        }}
-        showsHorizontalScrollIndicator={false}
-        snapToInterval={offset}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-          {
-            useNativeDriver: false,
-            listener: onScroll,
-          }
-        )}
-      >
-        {data.map((x, i) => (
-          <Item key={x} data={x} i={i} scrollX={scrollX} />
-        ))}
-      </ScrollView>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {data.map((x, i) => (
-          <View
-            key={x}
-            style={[
-              {
-                height: 10,
-                width: 10,
-                borderRadius: 5,
-                marginHorizontal: 3,
-                backgroundColor: "#444",
-              },
-              i == activeIndex.current && { backgroundColor: colors.yellow },
-            ]}
-          />
-        ))}
+      <View style={{ width: "100%" }}>
+        <Title>Filmes da semana</Title>
+        <ScrollView
+          horizontal
+          pagingEnabled
+          decelerationRate="fast"
+          style={{ flexGrow: 0, marginTop: RFValue(20) }}
+          contentContainerStyle={{
+            paddingHorizontal: padding,
+            alignItems: "center",
+            paddingVertical: 10,
+            zIndex: 1,
+          }}
+          showsHorizontalScrollIndicator={false}
+          snapToInterval={offset}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+            {
+              useNativeDriver: false,
+              listener: onScroll,
+            }
+          )}
+        >
+          {data.map((x, i) => (
+            <Item key={x} data={x} i={i} scrollX={scrollX} />
+          ))}
+        </ScrollView>
+        <View
+          style={{
+            // flex: 1,
+            marginTop: 10,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {data.map((x, i) => (
+            <View
+              key={x}
+              style={[
+                {
+                  height: 10,
+                  width: 10,
+                  borderRadius: 5,
+                  marginHorizontal: 3,
+                  backgroundColor: "#444",
+                },
+                i == activeIndex.current && { backgroundColor: colors.yellow },
+              ]}
+            />
+          ))}
+        </View>
       </View>
     </Container>
   );
