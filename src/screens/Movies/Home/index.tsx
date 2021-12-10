@@ -65,7 +65,7 @@ const data = [
   { text: "orange", uri: uri4 },
 ];
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [activeIndex, setActiveIndex] = useState({
     current: 0,
@@ -248,7 +248,13 @@ const Home = () => {
                 )}
               >
                 {data.map((x, i) => (
-                  <Item key={x.text} data={x} i={i} scrollX={scrollX} />
+                  <Item
+                    navigation={navigation}
+                    key={x.text}
+                    data={x}
+                    i={i}
+                    scrollX={scrollX}
+                  />
                 ))}
               </ScrollView>
               <View
@@ -329,13 +335,15 @@ const Home = () => {
 
 export default Home;
 
-function Item({ i, data, scrollX }) {
+function Item({ i, data, scrollX, navigation }) {
   const scale = scrollX.interpolate({
     inputRange: [-offset + i * offset, i * offset, offset + i * offset],
     outputRange: [0.9, 1, 0.9],
   });
   return (
-    <TouchableWithoutFeedback onPress={() => console.log("hi")}>
+    <TouchableWithoutFeedback
+      onPress={() => navigation.navigate("MovieDetails")}
+    >
       <Animated.View
         style={[
           {

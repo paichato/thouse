@@ -9,6 +9,7 @@ import Stats from "../screens/Movies/Stats";
 import Me from "../screens/Movies/Me";
 import colors from "../lib/colors";
 import { RFValue } from "react-native-responsive-fontsize";
+import MoviesDetails from "../screens/Movies/MovieDetails";
 
 const { Screen, Navigator } = createBottomTabNavigator();
 
@@ -80,6 +81,7 @@ export default function AppRoutes() {
           ),
         }}
       />
+      {/* <Screen name="MovieDetails" component={MoviesDetails} /> */}
     </Navigator>
   );
 }
