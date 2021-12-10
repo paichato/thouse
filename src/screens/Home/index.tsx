@@ -137,19 +137,16 @@ const Home = () => {
   return (
     <TouchableWithoutFeedback>
       <Container>
-        {activeIndex.current === 0 ? (
-          <Image
+        {data.map((img,i)=>{
+          return(
+            <Image
             style={[StyleSheet.absoluteFill, { flex: 1 }]}
-            source={{ uri }}
+            source={{ uri: activeIndex.current==i && img.uri }}
             blurRadius={3}
           />
-        ) : (
-          <Image
-            style={[StyleSheet.absoluteFill, { flex: 1 }]}
-            source={{ uri: uri2 }}
-            blurRadius={3}
-          />
-        )}
+          )
+        })}
+       
         <BlurView
           tint="dark"
           intensity={130}
@@ -246,7 +243,7 @@ const Home = () => {
                     key={x.text}
                     style={[
                       {
-                        height: 10,
+                        height: 2.5,
                         width: 10,
                         borderRadius: 5,
                         marginHorizontal: 3,

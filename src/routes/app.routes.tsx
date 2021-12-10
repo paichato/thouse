@@ -8,6 +8,7 @@ import Discover from "../screens/Discover";
 import Stats from "../screens/Stats";
 import Me from "../screens/Me";
 import colors from "../lib/colors";
+import { RFValue } from "react-native-responsive-fontsize";
 
 const { Screen, Navigator } = createBottomTabNavigator();
 
@@ -20,7 +21,13 @@ export default function AppRoutes() {
         tabBarInactiveBackgroundColor: colors.bg,
         tabBarActiveBackgroundColor: colors.bg,
         tabBarHideOnKeyboard:true,
-        
+        tabBarStyle:{
+          borderWidth: 0,
+          height: RFValue(60) ,
+          padding: 0,
+          borderTopColor:colors.yellow
+        }
+
         
       }}
       tabBarOptions={{

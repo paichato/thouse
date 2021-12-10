@@ -99,7 +99,7 @@ color: ${colors.yellow};
 
 export const CategoryItemContainer=styled(TouchableOpacity)`
 margin-top: ${RFValue(10)}px;
-margin-bottom: ${RFValue(30)}px;
+margin-bottom: ${RFValue(20)}px;
 `
 export const CategoryItemWrapper=styled.View`
 width: ${RFValue(60)}px;
