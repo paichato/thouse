@@ -7,6 +7,8 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "description": "beta version",
+    "githubUrl": "https://github.com/paichato/thouse"
   }
 }
