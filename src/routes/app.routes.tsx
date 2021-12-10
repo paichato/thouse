@@ -3,10 +3,10 @@ import { View, Text, Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Home from "../screens/Home";
-import Discover from "../screens/Discover";
-import Stats from "../screens/Stats";
-import Me from "../screens/Me";
+import Home from "../screens/Movies/Home";
+import Discover from "../screens/Movies/Discover";
+import Stats from "../screens/Movies/Stats";
+import Me from "../screens/Movies/Me";
 import colors from "../lib/colors";
 import { RFValue } from "react-native-responsive-fontsize";
 
@@ -20,15 +20,13 @@ export default function AppRoutes() {
         tabBarShowLabel: false,
         tabBarInactiveBackgroundColor: colors.bg,
         tabBarActiveBackgroundColor: colors.bg,
-        tabBarHideOnKeyboard:true,
-        tabBarStyle:{
+        tabBarHideOnKeyboard: true,
+        tabBarStyle: {
           borderWidth: 0,
-          height: RFValue(60) ,
+          height: RFValue(60),
           padding: 0,
-          borderTopColor:colors.yellow
-        }
-
-        
+          borderTopColor: colors.yellow,
+        },
       }}
       tabBarOptions={{
         activeTintColor: colors.white,

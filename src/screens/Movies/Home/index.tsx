@@ -12,8 +12,8 @@ import {
   StyleSheet,
   ImageBackground,
 } from "react-native";
-import { RFValue } from "react-native-responsive-fontsize";
-import colors from "../../lib/colors";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import colors from "../../../lib/colors";
 import {
   AvatarContainer,
   BackArrow,
@@ -24,15 +24,19 @@ import {
   CategoryItemContainer,
   CategoryItems,
   CategoryItemWrapper,
+  CloseIcon,
   Container,
   Emojis,
   Greeting,
   Greeting1,
   Header,
   Input,
+  RecentSearchContainer,
   RightArrowIcon,
   SearchContainer,
   SearchIcon,
+  SearchViewContainer,
+  SearchViewItem,
   SeeAllContainer,
   SeeAllText,
   Square,
@@ -100,6 +104,13 @@ const Home = () => {
   const prop = animation.visible ? { animation: animation.type } : {};
   //--------------------------------------------------------------------->>>>>>
 
+  // useEffect(() => {
+  //   const animate3 = (type) => {
+  //     setAnimation({ visible: true, type });
+  //   };
+  //   animate3("zoomIn");
+  // }, [activeIndex]);
+
   const onScroll = (e) => {
     const x = e.nativeEvent.contentOffset.x;
     let newIndex = Math.floor(x / itemWidth + 0.5);
@@ -110,10 +121,11 @@ const Home = () => {
 
   const handleUnFocus = () => {
     if (isFocused) {
+      setIsFocused(false);
       Keyboard.dismiss();
-      // setIsFocused(false);
+
       // setTimeout(() => {
-      animate2("fadeInUp");
+      // animate2("fadeInUp");
       // }, 1000);
     }
   };
@@ -136,10 +148,11 @@ const Home = () => {
 
   return (
     <TouchableWithoutFeedback>
-      <Container>
+      <Container style={isFocused && { paddingTop: RFValue(140) }}>
         {data.map((img, i) => {
           return (
-            <Image
+            <Animatable.Image
+              animation={"fadeIn"}
               style={[StyleSheet.absoluteFill, { flex: 1 }]}
               source={{ uri: activeIndex.current == i && img.uri }}
               blurRadius={3}
@@ -178,7 +191,7 @@ const Home = () => {
           <SearchIcon name="search1" size={24} color="black" />
           <Input
             onFocus={handleFocus}
-            onBlur={() => setIsFocused(false)}
+            // onBlur={() => setIsFocused(false)}
             placeholderTextColor={colors.text}
             placeholder="pesquisar"
           />
@@ -188,6 +201,8 @@ const Home = () => {
             // easing="ease-in-sine"
             style={{ width: "100%" }}
             animation="fadeInUp"
+            duration={1000}
+            // delay={100}
             {...prop}
           >
             <CategoryContainer>
@@ -267,7 +282,44 @@ const Home = () => {
           </Animatable.View>
         ) : (
           <Animatable.View style={{ width: "100%" }} animation="fadeInDown">
-            <Greeting>SOme search</Greeting>
+            <RecentSearchContainer>
+              <TouchableOpacity>
+                <CloseIcon name="ios-close-sharp" size={14} color="white" />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Greeting>Avangers</Greeting>
+              </TouchableOpacity>
+            </RecentSearchContainer>
+            <SearchViewContainer
+              style={{ width: "100%" }}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={{
+                width: "100%",
+                height: RFValue(400),
+                alignItems: "center",
+                // justifyContent: "space-between",
+                // flexDirection: "row",
+              }}
+              data={data}
+              renderItem={({ item }) => (
+                <SearchViewItem>
+                  <ImageBackground
+                    blurRadius={10}
+                    style={{
+                      flex: 1,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: "100%",
+                      borderRadius: 10,
+                      overflow: "hidden",
+                    }}
+                    source={{ uri: item.uri }}
+                  >
+                    <Title>{item.text}</Title>
+                  </ImageBackground>
+                </SearchViewItem>
+              )}
+            ></SearchViewContainer>
           </Animatable.View>
         )}
       </Container>

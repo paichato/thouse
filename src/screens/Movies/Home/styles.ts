@@ -1,11 +1,11 @@
 import styled from 'styled-components/native'
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { AntDesign } from '@expo/vector-icons'; 
-import colors from '../../lib/colors'
+import colors from '../../../lib/colors'
 import { MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import fonts from '../../lib/fonts'
+import fonts from '../../../lib/fonts'
 
 
 export const Container=styled.View`
@@ -144,9 +144,30 @@ font-weight: bold;
 `
 
 export const RecentSearchContainer=styled.View`
-
-
+width: 100%;
+flex-direction: row;
+align-items: center;
+padding: 10px;
 `
 
+export const CloseIcon=styled(Ionicons)`
+margin-right:8px;
+`
+
+export const SearchViewContainer=styled.FlatList`
+width: 100%;
+/* padding-top:20px; */
+
+`
+export const SearchViewItem=styled(TouchableOpacity)`
+height: ${RFValue(45)}px;
+/* width: ${RFValue(30)}px; */
+width: ${RFValue(245)}px;
+background-color: ${colors.white};
+border-radius:10px;
+margin-bottom:10px;
+align-items: center;
+justify-content:center;
+`
 
 

@@ -6,7 +6,7 @@ import {
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Routes from "./src/routes";
-import Home from "./src/screens/Home";
+import Home from "./src/screens/Movies/Home";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
