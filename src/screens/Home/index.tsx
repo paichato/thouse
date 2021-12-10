@@ -32,6 +32,7 @@ import {
   Title,
   WelcomeContainer,
 } from "./styles";
+import * as Animatable from "react-native-animatable";
 
 const { width, height } = Dimensions.get("window");
 const itemWidth = (width / 7) * 4;
@@ -64,6 +65,22 @@ const Home = () => {
       bounciness: 1000,
     }).start();
   };
+
+  //--------------------------------------------------------------------->>>>>>
+  //For General
+  const [animation, setAnimation] = useState({
+    visible: false,
+    type: "",
+  });
+  const animate2 = (type: string) => {
+    setAnimation({ visible: false, type });
+    // setTimeout(() => {
+      setAnimation({ visible: true, type });
+    // }, 550);
+  };
+  const prop = animation.visible ? { animation: animation.type } : {};
+  //--------------------------------------------------------------------->>>>>>
+
   const onScroll = (e) => {
     const x = e.nativeEvent.contentOffset.x;
     let newIndex = Math.floor(x / itemWidth + 0.5);
@@ -73,8 +90,17 @@ const Home = () => {
   };
 
   const handleUnFocus = () => {
-    setIsFocused(false);
-    Keyboard.dismiss();
+    if (isFocused) {
+      animate2("fadeInUp");
+
+      Keyboard.dismiss();
+      setIsFocused(false);
+    }
+  };
+
+  const handleFocus = () => {
+    animate2("fadeOutDown");
+    setIsFocused(true);
   };
 
   const CatItem = ({ emo, text, action }) => {
@@ -85,63 +111,6 @@ const Home = () => {
         </CategoryItemWrapper>
         <Greeting>{text}</Greeting>
       </CategoryItemContainer>
-    );
-  };
-
-  const Cards = () => {
-    return (
-      <>
-        <ScrollView
-          horizontal
-          pagingEnabled
-          decelerationRate="fast"
-          style={{ flexGrow: 0, marginTop: RFValue(20) }}
-          contentContainerStyle={{
-            paddingHorizontal: padding,
-            alignItems: "center",
-            paddingVertical: 10,
-            zIndex: 1,
-          }}
-          showsHorizontalScrollIndicator={false}
-          snapToInterval={offset}
-          onScroll={Animated.event(
-            [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-            {
-              useNativeDriver: false,
-              listener: onScroll,
-            }
-          )}
-        >
-          {data.map((x, i) => (
-            <Item key={x} data={x} i={i} scrollX={scrollX} />
-          ))}
-        </ScrollView>
-        <View
-          style={{
-            // flex: 1,
-            marginTop: 10,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {data.map((x, i) => (
-            <View
-              key={x}
-              style={[
-                {
-                  height: 10,
-                  width: 10,
-                  borderRadius: 5,
-                  marginHorizontal: 3,
-                  backgroundColor: "#444",
-                },
-                i == activeIndex.current && { backgroundColor: colors.yellow },
-              ]}
-            />
-          ))}
-        </View>
-      </>
     );
   };
 
@@ -161,14 +130,14 @@ const Home = () => {
         <SearchContainer>
           <SearchIcon name="search1" size={24} color="black" />
           <Input
-            onFocus={() => setIsFocused(true)}
+            onFocus={handleFocus}
             onBlur={() => setIsFocused(false)}
             placeholderTextColor={colors.text}
             placeholder="pesquisar"
           />
         </SearchContainer>
         {!isFocused ? (
-          <>
+          <Animatable.View style={{ width: "100%" }} {...prop}>
             <CategoryContainer>
               <CategoryHeader>
                 <Title>Categorias</Title>
@@ -243,7 +212,7 @@ const Home = () => {
                 ))}
               </View>
             </View>
-          </>
+          </Animatable.View>
         ) : (
           <View></View>
         )}
