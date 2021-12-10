@@ -113,7 +113,7 @@ const Home = () => {
       Keyboard.dismiss();
       // setIsFocused(false);
       // setTimeout(() => {
-      //   animate2("fadeInUp");
+      animate2("fadeInUp");
       // }, 1000);
     }
   };
@@ -137,26 +137,32 @@ const Home = () => {
   return (
     <TouchableWithoutFeedback>
       <Container>
-        {data.map((img,i)=>{
-          return(
+        {data.map((img, i) => {
+          return (
             <Image
-            style={[StyleSheet.absoluteFill, { flex: 1 }]}
-            source={{ uri: activeIndex.current==i && img.uri }}
-            blurRadius={3}
-          />
-          )
+              style={[StyleSheet.absoluteFill, { flex: 1 }]}
+              source={{ uri: activeIndex.current == i && img.uri }}
+              blurRadius={3}
+            />
+          );
         })}
-       
+
         <BlurView
           tint="dark"
           intensity={130}
           style={[StyleSheet.absoluteFill, { flex: 1 }]}
         ></BlurView>
         {isFocused && (
-          <BackCointainer onPress={handleUnFocus}>
-            <BackArrow name="md-chevron-back" size={24} color={colors.white} />
-            <BackText>Voltar</BackText>
-          </BackCointainer>
+          <Animatable.View style={{ width: "100%" }} animation="fadeInLeft">
+            <BackCointainer onPress={handleUnFocus}>
+              <BackArrow
+                name="md-chevron-back"
+                size={24}
+                color={colors.white}
+              />
+              <BackText>Voltar</BackText>
+            </BackCointainer>
+          </Animatable.View>
         )}
         <Header>
           <WelcomeContainer>
@@ -181,6 +187,7 @@ const Home = () => {
           <Animatable.View
             // easing="ease-in-sine"
             style={{ width: "100%" }}
+            animation="fadeInUp"
             {...prop}
           >
             <CategoryContainer>
@@ -259,7 +266,9 @@ const Home = () => {
             </View>
           </Animatable.View>
         ) : (
-          <View></View>
+          <Animatable.View style={{ width: "100%" }} animation="fadeInDown">
+            <Greeting>SOme search</Greeting>
+          </Animatable.View>
         )}
       </Container>
     </TouchableWithoutFeedback>

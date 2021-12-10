@@ -5,6 +5,7 @@ import colors from '../../lib/colors'
 import { MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import fonts from '../../lib/fonts'
 
 
 export const Container=styled.View`
@@ -34,14 +35,17 @@ export const AvatarContainer=styled.View`
 export const Greeting=styled.Text`
 color:${colors.text};
 text-align: center;
+font-family:${fonts.bold};
 `
 export const Greeting1=styled.Text`
 color:${colors.text};
+font-family:${fonts.bold};
 /* text-align: center; */
 `
 export const Title=styled.Text`
 color:${colors.white};
-font-weight: bold;
+/* font-weight: bold; */
+font-family:${fonts.bold};
 `
 export const Square=styled.View`
 height: 30px;
@@ -65,6 +69,7 @@ margin-top: ${RFValue(10)}px;
 export const Input=styled.TextInput`
 width: 80%;
 color:${colors.text};
+font-family:${fonts.regular};
 `
 
 export const SearchIcon=styled(AntDesign)`
@@ -90,7 +95,7 @@ align-items: center;
 
 export const SeeAllText=styled.Text`
 color: ${colors.yellow};
-
+font-family:${fonts.bold};
 `
 
 export const RightArrowIcon=styled(MaterialIcons)`
@@ -135,6 +140,11 @@ export const BackArrow=styled(Ionicons)`
 export const BackText=styled.Text`
 color: ${colors.white};
 font-weight: bold;
+
+`
+
+export const RecentSearchContainer=styled.View`
+
 
 `
 
