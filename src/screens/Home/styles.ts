@@ -4,6 +4,7 @@ import { AntDesign } from '@expo/vector-icons';
 import colors from '../../lib/colors'
 import { MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 
 export const Container=styled.View`
@@ -32,8 +33,12 @@ export const AvatarContainer=styled.View`
 
 export const Greeting=styled.Text`
 color:${colors.text};
+text-align: center;
 `
-
+export const Greeting1=styled.Text`
+color:${colors.text};
+/* text-align: center; */
+`
 export const Title=styled.Text`
 color:${colors.white};
 font-weight: bold;
@@ -113,6 +118,24 @@ export const CategoryItems=styled.View`
 flex-direction: row;
 align-items: center;
 justify-content: space-between;
+`
+
+export const BackCointainer=styled(TouchableOpacity)`
+width: 100%;
+flex-direction: row;
+/* background-color: ${colors.unselected}; */
+border-radius: 10px;
+
+`
+
+export const BackArrow=styled(Ionicons)`
+
+`
+
+export const BackText=styled.Text`
+color: ${colors.white};
+font-weight: bold;
+
 `
 
 

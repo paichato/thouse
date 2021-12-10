@@ -21,6 +21,7 @@ export default function AppRoutes() {
         tabBarActiveBackgroundColor: colors.bg,
         tabBarHideOnKeyboard:true,
         
+        
       }}
       tabBarOptions={{
         activeTintColor: colors.white,

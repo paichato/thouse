@@ -8,11 +8,17 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Image,
+  StyleSheet,
+  ImageBackground,
 } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import colors from "../../lib/colors";
 import {
   AvatarContainer,
+  BackArrow,
+  BackCointainer,
+  BackText,
   CategoryContainer,
   CategoryHeader,
   CategoryItemContainer,
@@ -21,6 +27,7 @@ import {
   Container,
   Emojis,
   Greeting,
+  Greeting1,
   Header,
   Input,
   RightArrowIcon,
@@ -33,20 +40,32 @@ import {
   WelcomeContainer,
 } from "./styles";
 import * as Animatable from "react-native-animatable";
+import { BlurView } from "expo-blur";
 
 const { width, height } = Dimensions.get("window");
 const itemWidth = (width / 7) * 4;
 const itemHeight = (height / 5) * 2;
 const padding = (width - itemWidth) / 2;
 const offset = itemWidth;
+const uri = "https://br.web.img2.acsta.net/pictures/21/05/10/15/32/2425639.png";
+const uri2 = "https://i.ytimg.com/vi/MJuFdpVCcsY/movieposter_en.jpg";
+const uri4 =
+  "https://lumiere-a.akamaihd.net/v1/images/p_blackwidow_21043_v2_6d1b73b8.jpeg";
+const uri3 =
+  "https://m.media-amazon.com/images/M/MV5BMTM3NjQyODI3M15BMl5BanBnXkFtZTcwMDM4NjM0OA@@._V1_FMjpg_UX1000_.jpg";
 
-const data = ["violet", "indigo", "blue", "orange"];
+const data = [
+  { text: "violet", uri: uri },
+  { text: "indigo", uri: uri2 },
+  { text: "blue", uri: uri3 },
+  { text: "orange", uri: uri4 },
+];
 
 const Home = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [activeIndex, setActiveIndex] = useState({
-    current: 1,
-    previous: 0,
+    current: 0,
+    previous: null,
   });
   const scale = useRef(new Animated.Value(0)).current;
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -73,9 +92,9 @@ const Home = () => {
     type: "",
   });
   const animate2 = (type: string) => {
-    setAnimation({ visible: false, type });
+    // setAnimation({ visible: false, type });
     // setTimeout(() => {
-      setAnimation({ visible: true, type });
+    // setAnimation({ visible: true, type });
     // }, 550);
   };
   const prop = animation.visible ? { animation: animation.type } : {};
@@ -91,10 +110,11 @@ const Home = () => {
 
   const handleUnFocus = () => {
     if (isFocused) {
-      animate2("fadeInUp");
-
       Keyboard.dismiss();
-      setIsFocused(false);
+      // setIsFocused(false);
+      // setTimeout(() => {
+      //   animate2("fadeInUp");
+      // }, 1000);
     }
   };
 
@@ -115,11 +135,35 @@ const Home = () => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={handleUnFocus}>
+    <TouchableWithoutFeedback>
       <Container>
+        {activeIndex.current === 0 ? (
+          <Image
+            style={[StyleSheet.absoluteFill, { flex: 1 }]}
+            source={{ uri }}
+            blurRadius={3}
+          />
+        ) : (
+          <Image
+            style={[StyleSheet.absoluteFill, { flex: 1 }]}
+            source={{ uri: uri2 }}
+            blurRadius={3}
+          />
+        )}
+        <BlurView
+          tint="dark"
+          intensity={130}
+          style={[StyleSheet.absoluteFill, { flex: 1 }]}
+        ></BlurView>
+        {isFocused && (
+          <BackCointainer onPress={handleUnFocus}>
+            <BackArrow name="md-chevron-back" size={24} color={colors.white} />
+            <BackText>Voltar</BackText>
+          </BackCointainer>
+        )}
         <Header>
           <WelcomeContainer>
-            <Greeting>Welcome fulano</Greeting>
+            <Greeting1>Welcome fulano</Greeting1>
             <Title>Vamos relaxar e assistir um filme</Title>
           </WelcomeContainer>
           <AvatarContainer>
@@ -137,7 +181,11 @@ const Home = () => {
           />
         </SearchContainer>
         {!isFocused ? (
-          <Animatable.View style={{ width: "100%" }} {...prop}>
+          <Animatable.View
+            // easing="ease-in-sine"
+            style={{ width: "100%" }}
+            {...prop}
+          >
             <CategoryContainer>
               <CategoryHeader>
                 <Title>Categorias</Title>
@@ -152,9 +200,9 @@ const Home = () => {
               </CategoryHeader>
               <CategoryItems>
                 <CatItem text="Romance" emo="😍" />
-                <CatItem text="Romance" emo="😂" />
-                <CatItem text="Romance" emo="🔥" />
-                <CatItem text="Romance" emo="😘" />
+                <CatItem text="Comedia" emo="😂" />
+                <CatItem text="Populares" emo="🔥" />
+                <CatItem text="Drama" emo="😘" />
               </CategoryItems>
             </CategoryContainer>
             <View style={{ width: "100%" }}>
@@ -181,7 +229,7 @@ const Home = () => {
                 )}
               >
                 {data.map((x, i) => (
-                  <Item key={x} data={x} i={i} scrollX={scrollX} />
+                  <Item key={x.text} data={x} i={i} scrollX={scrollX} />
                 ))}
               </ScrollView>
               <View
@@ -195,7 +243,7 @@ const Home = () => {
               >
                 {data.map((x, i) => (
                   <View
-                    key={x}
+                    key={x.text}
                     style={[
                       {
                         height: 10,
@@ -244,7 +292,17 @@ function Item({ i, data, scrollX }) {
           { transform: [{ scale }] },
         ]}
       >
-        <Text>{data}</Text>
+        <ImageBackground
+          style={{
+            flex: 1,
+            width: "100%",
+            overflow: "hidden",
+            borderRadius: 30,
+          }}
+          source={{ uri: data?.uri }}
+        >
+          {/* <Text>{data?.text}</Text> */}
+        </ImageBackground>
       </Animated.View>
     </TouchableWithoutFeedback>
   );
