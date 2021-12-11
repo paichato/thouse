@@ -59,7 +59,7 @@ const uri3 =
   "https://m.media-amazon.com/images/M/MV5BMTM3NjQyODI3M15BMl5BanBnXkFtZTcwMDM4NjM0OA@@._V1_FMjpg_UX1000_.jpg";
 
 const data = [
-  { text: "violet", uri: uri },
+  { text: "Venom 2: Let there be Carnage", uri: uri },
   { text: "indigo", uri: uri2 },
   { text: "blue", uri: uri3 },
   { text: "orange", uri: uri4 },
