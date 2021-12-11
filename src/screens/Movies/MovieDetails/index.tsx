@@ -17,14 +17,14 @@ import {
 } from "./styles";
 import * as Animatable from "react-native-animatable";
 
-export default function MoviesDetails() {
+export default function MoviesDetails({navigation}) {
   const uri =
     "https://br.web.img2.acsta.net/pictures/21/05/10/15/32/2425639.png";
 
   return (
     <Container>
       <HeaderContainer>
-        <TouchableOpacity style={{ marginRight: "25%" }}>
+        <TouchableOpacity onPress={()=>navigation.goBack()} style={{ marginRight: "25%" }}>
           <BackArrow name="md-chevron-back" size={24} color={colors.white} />
         </TouchableOpacity>
         <Title>Detalhes do filme</Title>
@@ -70,7 +70,7 @@ export default function MoviesDetails() {
         }}
       >
         <Title>Sinopse</Title>
-        <Greeting1>
+        <Greeting1 style={{marginTop:8}}>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s, when an unknown printer took a galley of type and
